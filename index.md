@@ -49,6 +49,8 @@ i 表示第i个分类；
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax3.PNG)
 
+得出：
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample2.PNG)
 
 
 You can use the [editor on GitHub](https://github.com/jayliangdl/deep_learn/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
