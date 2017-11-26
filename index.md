@@ -32,6 +32,7 @@
 
 
 Softmax的公式列如下：
+
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax.PNG)
 
 i 表示第i个分类；
@@ -39,7 +40,9 @@ i 表示第i个分类；
 
 我們以下例说明具体计算步骤如下：
 步骤一（向前传播最后一步）：
-当我們在向前传播算出了最后一层的Z值后（Z=WX+b），（注：最后一层Z是一个（4，1）的向量），我們依据上面提及的![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax2.PNG)公式计算4个分类的激活值。
+当我們在向前传播算出了最后一层的Z值后（Z=WX+b），（注：最后一层Z是一个（4，1）的向量），我們依据上面提及的
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax2.PNG)
+公式计算4个分类的激活值。
 
 例如，
 在训练集中某个样本我們算出Z值为：
