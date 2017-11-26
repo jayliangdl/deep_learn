@@ -133,7 +133,7 @@ i 表示总共有i个分类；
 
 
 ### Softmax推导：
-以下是softmax层W和b导数的推导。需要先重点说明的是，我們需要分两种情况推导，第1种情况是我們推导真实类别的W和b导数，例如上例中第2类别小猫是真实类别，我们要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG)；另外，第2种情况是我們推导非真实类别的W和b导数，例如上例中第1类不是真实类别，我们需要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d3.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d4.PNG)。
+以下是softmax层W和b导数的推导。需要先重点说明的是，我們需要分两种情况推导，第1种情况是我們推导真实类别的W和b导数，例如上例中第2类别小猫是真实类别，我们要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d22.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d23.PNG)；另外，第2种情况是我們推导非真实类别的W和b导数，例如上例中第1类不是真实类别，我们需要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d3.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d4.PNG)。
 
 
 另外在推导前，我們先再写出最后一层向前传播及Cost的公式，这有助于我們理解推导过程：
