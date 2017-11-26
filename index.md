@@ -1,14 +1,14 @@
 # 神经网络深度学习--多分类的实现 
 
-##概要：
+### 概要：
 
 本文主要是描述如何使用神经网络解决多分类问题。具体地，我們举例介绍了多分类的应用场景；介绍其中关键的softmax激活函数；详细介绍了softmax如何执行向前传播、向后传播；详细介绍了softmax的推导过程。最后，我們对一个分为3类的数据集合尝试让程序进行学习辨识，经过一个3层的神经网络（列完整的示例代码），程序能辨识到大部分的数据，准确率达到98%喔。
 
-##适读人群：
+### 适读人群：
 
 对神经网络有初步了解，知道向前传播、向后传播等神经网络的关键步骤，知道如何用神经网络解决二分类问题。希望扩展了解多分类问题的解决方案，希望了解softmax激活函数的详细计算过程及推导过程。
 
-##正文：
+### 正文：
 
 
 
@@ -119,15 +119,15 @@ i 表示总共有i个分类；
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/formula1.PNG)
 
 
-需要特别说明的是，以上公式只是针对最后一层，针对softmax函数。另外此公式只针对一个样本，实际上我們有m个样本数据要考虑，所以![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)，y两者都是一个(4,m)的向量，而最后用于W和b更新的W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG)，是4个实数，分别是对应4个可选值（小狗、小猫、小兔、其他）的W、b导数。所以以上公式还需要把m个样本的结果加总，除以m，以取平均值。
+需要特别说明的是，以上公式只是针对最后一层，针对softmax函数。另外此公式只针对一个样本，实际上我們有m个样本数据要考虑，所以![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)，y两者都是一个(4,m)的向量，而最后用于W和b更新的W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG) 是4个实数，分别是对应4个可选值（小狗、小猫、小兔、其他）的W、b导数。所以以上公式还需要把m个样本的结果加总，除以m，以取平均值。
 
 然后我們依此执行对最后一层的W和b的更新：
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/formula2.PNG)
 
-注：learning_rate为学习效率
+注：learning_rate为学习率
 
-注：以上计算步骤的说明均只针对神经网络中最后一道softmax层，在向前传播步骤中还有其他层的计算在softmax之前；在向后传步骤中还有其他层的计算在softmax层之后。由于不是本文重点，文中均忽略了。
+注：以上计算步骤的说明均只针对神经网络中最后一道softmax层，在向前传播步骤中还有其他层的计算在softmax之前；在向后传步骤中还有其他层的计算在softmax层之后。由于这些部分不是本文重点，文中均忽略了。
 
 如果对最后一道softmax层中W、b导数推导有兴趣的同学可以再读以下部分，如果没有兴趣的同学，可以直接跳到样例程序继续阅读。
 
