@@ -245,7 +245,6 @@ def backward(dA,Z,m,pre_A,W,A,Y,activation):
         db=1.0/m*np.sum(dZ,axis=1,keepdims=True)
         pre_dA=np.dot(W.T,dZ)
     elif activation=='softmax':
-        print(A.shape)
         dZ=A-Y
         dW=1.0/m*np.dot(dZ,pre_A.T)
         db=1.0/m*np.sum(dZ,axis=1,keepdims=True)
@@ -257,12 +256,6 @@ def update_parameter(learning_rate,W,b,dW,db):
     b=b-learning_rate*db
     return W,b
 
-'''
-func:init_parameter(hidden_layer)
-arg:
-    hidden_layer为所有层的
-初始化W/b值，并返回类型为dict的param。
-'''
 def init_parameter(hidden_layer):
     np.random.seed(3)
     param = {}
@@ -360,43 +353,30 @@ if __name__=="__main__":
     
     learning_rate=0.0075
     m=X.shape[1]
-    number_iterator=5000
+    number_iterator=1000
     predict_result,accuracy,cost = mainlogic(X,Y,hidden_layer,number_iterator,m,learning_rate)
 ```
 
-You can use the [editor on GitHub](https://github.com/jayliangdl/deep_learn/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
+以下是经过2000次iterator后，系统稳定成功学习(或分辨出)到298个点(总共300个点)，准确率达98%。
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+i:0,cost:-1.08794075622,accuracy:68
+i:100,cost:-1.85382745221,accuracy:220
+i:200,cost:-2.03297882971,accuracy:261
+i:300,cost:-2.13229221009,accuracy:270
+i:400,cost:-2.20329231893,accuracy:284
+i:500,cost:-2.26014863013,accuracy:290
+i:600,cost:-2.30750956501,accuracy:293
+i:700,cost:-2.34635566878,accuracy:296
+i:800,cost:-2.37736114138,accuracy:298
+i:900,cost:-2.40211682975,accuracy:298
+i:1000,cost:-2.42218998888,accuracy:298
+i:1100,cost:-2.43877230178,accuracy:298
+i:1200,cost:-2.45271723467,accuracy:298
+i:1300,cost:-2.46463049382,accuracy:298
+i:1400,cost:-2.47494547398,accuracy:298
+i:1500,cost:-2.48397637848,accuracy:298
+i:1600,cost:-2.49195496261,accuracy:298
+i:1700,cost:-2.49905636529,accuracy:298
+i:1800,cost:-2.50541703851,accuracy:298
+i:1900,cost:-2.51114663761,accuracy:298
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jayliangdl/deep_learn/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
