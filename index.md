@@ -94,6 +94,21 @@ i 表示第i个分类；
 
 在本例中，由于我們有4个可选值（小狗、小猫、小兔、其他），单个样本的cost公式可再转化为：
 
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/cost2.PNG)
+
+由于y_1，y_3，y_4均为0所以公式可转为：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/cost3.PNG)
+
+上面为单个样本的公式，如果扩展到m个样本，则Cost Function J为
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/cost4.PNG)
+
+我們的目标是尽量让Cost Function J尽量小，依据上面公式，那么就是让![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)尽量的大。如上例，就是让![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat2.PNG)尽量的大。
+
+
+步骤三（反向传播，计算W和b的导数）：
+依据上面公式推导出：
 
 
 
