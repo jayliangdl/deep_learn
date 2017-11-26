@@ -28,6 +28,29 @@
 | 0.6 | 小兔 |
 | 0.2 | 其他 |
 
+<table>
+  <tr>
+    <th width=50%, bgcolor=yellow >经过softmax计算出概率值</th>
+    <th width=50%, bgcolor=yellow>分类</th>
+  </tr>
+  <tr>
+    <td bgcolor=#000000> 0.1 </td>
+    <td> 小狗 </td>
+  </tr>
+  <tr>
+    <td bgcolor=#000000> 0.1 </td>
+    <td> 小猫 </td>
+  </tr>
+  <tr>
+    <td bgcolor=#000000> 0.6 </td>
+    <td> 小兔</td>
+  </tr>
+  <tr>
+    <td bgcolor=#000000> 0.2 </td>
+    <td> 其他 </td>
+  </tr>
+</table>
+
 
 
 You can use the [editor on GitHub](https://github.com/jayliangdl/deep_learn/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
