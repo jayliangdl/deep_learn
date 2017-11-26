@@ -70,6 +70,18 @@ i 表示第i个分类；
 （ 注：本文没有再说明为何要用此Cost公式，如有兴趣请再搜索其他文献）
 
 
+其中表示图片真实分类的y值是一个（4,1）的向量，在本例中第2个分类小猫是该图片的真实分类，所以y值表示为：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample4.PNG)
+
+再额外举一例，如果第3个分类小兔才是该图片的真实分类，则表示为：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample5.PNG)
+
+
+如果我們的训练集有10张图片，它们的真实类别分别是:
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/table1.PNG)
 
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)是我們训练出网络所计算得到的预估值，我們需要让![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)尽量逼近y，![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)与y的差距尽量小，即cost尽量小。
