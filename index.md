@@ -140,7 +140,7 @@ i 表示总共有i个分类；
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/formula3.PNG)
 
-如前所述，我們最终的目标是要我們网络估算出的y ̂值最大程度与真实值y一样，所以我們要Cost function J最小，所以我们目标要计算出W和b在什么情况下，可以让J的值最小。我們用导数反向求W和b. 即我們最关键一步是计算W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d5.PNG) 和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d6.PNG) ，然后执行W和b的梯度更新。
+如前所述，我們最终的目标是要我們网络估算出的![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)值最大程度与真实值y一样，所以我們要Cost function J最小，所以我们目标要计算出W和b在什么情况下，可以让J的值最小。我們用导数反向求W和b. 即我們最关键一步是计算W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d5.PNG) 和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d6.PNG) ，然后执行W和b的梯度更新。
 
 大致的思路是：
 从最后一步Cost function J，我們可以计算出![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG) 对Cost的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d7.PNG) （依据公式C）
