@@ -28,28 +28,23 @@
 | 0.6 | 小兔 |
 | 0.2 | 其他 |
 
-<table>
-  <tr>
-    <th width='50%' bgcolor='yellow' >经过softmax计算出概率值</th>
-    <th width='50%' bgcolor='yellow'>分类</th>
-  </tr>
-  <tr>
-    <td bgcolor=#000000'> 0.1 </td>
-    <td> 小狗 </td>
-  </tr>
-  <tr>
-    <td bgcolor='#000000'> 0.1 </td>
-    <td> 小猫 </td>
-  </tr>
-  <tr>
-    <td bgcolor='#000000'> 0.6 </td>
-    <td> 小兔</td>
-  </tr>
-  <tr>
-    <td bgcolor='#000000'> 0.2 </td>
-    <td> 其他 </td>
-  </tr>
-</table>
+例如上表中，我們算出数字小猫的概率是0.6，为4个分类中最大，所以我們猜这是小猫的图片。
+
+
+Softmax的公式列如下：
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax.PNG)
+
+i 表示第i个分类；
+
+
+我們以下例说明具体计算步骤如下：
+步骤一（向前传播最后一步）：
+当我們在向前传播算出了最后一层的Z值后（Z=WX+b），（注：最后一层Z是一个（4，1）的向量），我們依据上面提及的![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax2.PNG)公式计算4个分类的激活值。
+
+例如，
+在训练集中某个样本我們算出Z值为：
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample1.PNG)
+
 
 
 
