@@ -148,7 +148,7 @@ i 表示总共有i个分类；
 
 然后地，我們又可以计算出![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG) 对Z的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d8.PNG)（依据公式B），
 
-再，我們又可以计算出对Z_对W的导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d9.PNG)（依据公式A），
+再，我們又可以计算出对Z对W的导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d9.PNG)（依据公式A），
 
 最后依据链式法则，将上面三个结果相乘，计算出W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d5.PNG) 和b导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d6.PNG)
 
@@ -174,12 +174,12 @@ i 表示总共有i个分类；
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d17.PNG)
 
 原因是
-对于第1种情况，y=1，所以和上面推导的：
+对于第1种情况，因为 y=1，所以和上面推导的：
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d19.PNG)
 
 原因是
-对于第1种情况，y=1，所以和上面推导的：
+对于第1种情况，因为 y=1，所以和上面推导的：
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d20.PNG)
 是一致的。
 
