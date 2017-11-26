@@ -110,6 +110,89 @@ i 表示第i个分类；
 步骤三（反向传播，计算W和b的导数）：
 依据上面公式推导出：
 
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/cost5.PNG)
+
+我們最终可以推导出最后一层W和b的导数分别是：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/formula1.PNG)
+
+
+需要特别说明的是，以上公式只是针对最后一层，针对softmax函数。另外此公式只针对一个样本，实际上我們有m个样本数据要考虑，所以![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)，y两者都是一个(4,m)的向量，而最后用于W和b更新的W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG)，y两者都是一个(4,m)的向量，而最后用于W和b更新的W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG) 是4个实数，分别是对应4个可选值（小狗、小猫、小兔、其他）的W、b导数。所以以上公式还需要把m个样本的结果加总，除以m，以取平均值。
+
+然后我們依此执行对最后一层的W和b的更新：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/formula2.PNG)
+
+注：learning_rate为学习效率
+
+注：以上计算步骤的说明均只针对神经网络中最后一道softmax层，在向前传播步骤中还有其他层的计算在softmax之前；在向后传步骤中还有其他层的计算在softmax层之后。由于不是本文重点，文中均忽略了。
+
+如果对最后一道softmax层中W、b导数推导有兴趣的同学可以再读以下部分，如果没有兴趣的同学，可以直接跳到样例程序继续阅读。
+
+
+
+以下是softmax层W和b导数的推导。需要先重点说明的是，我們需要分两种情况推导，第1种情况是我們推导真实类别的W和b导数，例如上例中第2类别小猫是真实类别，我们要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG)；另外，第2种情况是我們推导非真实类别的W和b导数，例如上例中第1类不是真实类别，我们需要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d3.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d4.PNG)。
+
+
+另外在推导前，我們先再写出最后一层向前传播及Cost的公式，这有助于我們理解推导过程：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/formula3.PNG)
+
+如前所述，我們最终的目标是要我們网络估算出的y ̂值最大程度与真实值y一样，所以我們要Cost function J最小，所以我们目标要计算出W和b在什么情况下，可以让J的值最小。我們用导数反向求W和b. 即我們最关键一步是计算W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d5.PNG) 和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d6.PNG) ，然后执行W和b的梯度更新。
+
+大致的思路是：
+从最后一步Cost function J，我們可以计算出![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG) 对Cost的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d7.PNG) （依据公式C）
+
+然后地，我們又可以计算出对 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG) 对𝑍的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d8.PNG)（依据公式B），
+
+再，我們又可以计算出对Z_对W的导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d9.PNG)（依据公式A），
+
+最后依据链式法则，将上面三个结果相乘，计算出W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d5.PNG) 和b导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d6.PNG)
+
+需要特别特别说明的是![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d7.PNG) 中i是指真实类别，在这个公式中，只有真实类别的变量。例如本例中类别2小猫是真实值，所以i=2，这点很难理解也难表达。但是只有领悟了才能明白下面推导的情况2为何公式长这个样子：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d10.PNG)
+
+具体推导如下：
+情况1（针对真实类别的W/b，我們以本文案例说明，假设类别2小猫是真实值 ）：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d11.PNG)
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d12.PNG)
+
+情况2（针对非真是类别的W/b，我們以本文案例说明，假设类别2小猫是真实值，类别1为非真是值，下面推导计算类别1的![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d13.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d14.PNG)）：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d15.PNG)
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d16.PNG)
+
+上面推导虽复杂，要区分两种不同情况，不过也可以总结成一个简单的公式，适合上面两种情况，就是：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d17.PNG)
+
+原因是
+对于第1种情况，y=1，所以和上面推导的：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d19.PNG)
+
+原因是
+对于第1种情况，y=1，所以和上面推导的：
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d20.PNG)
+是一致的。
+
+对于第2种情况，y=0，所以也和上面推导的：
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d21.PNG)
+也是一致的。
+
+最后我們将展示一个具体的示例，该示例展示了一个神经网络如何学习并分辨以下的数据点。
+如下图，我們按一定规律产生了三种不同颜色的数据点，这些点由两个feature组成（下图X1和X2）。我們编写了一个3层的神经网络学习这些点的分布，学习过程中，我們不断检测程序学习的准确率。最后程序辨识的准确率可达98%。
+
+这个案例是一个较简单的例子，如我們输入不同的数据，用同样的程序，让系统正确对事物进行分类处理。
+
+例如我們输入一堆动物图片及它们的真实分类（如小猫、小狗、小兔、其他），用该套神经网络学习后，当我們输入一个新的图片，程序可辨识这是哪类动物；又如输入球队间比赛的历史记录，用同样程序学习，最终可以估算下场比赛的胜负等。例子还有很多。
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample_program.PNG)
+
 
 
 You can use the [editor on GitHub](https://github.com/jayliangdl/deep_learn/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
