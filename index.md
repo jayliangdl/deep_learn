@@ -119,7 +119,7 @@ i 表示总共有i个分类；
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/formula1.PNG)
 
 
-需要特别说明的是，以上公式只是针对最后一层，针对softmax函数。另外此公式只针对一个样本，实际上我們有m个样本数据要考虑，所以![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)，y两者都是一个(4,m)的向量，而最后用于W和b更新的W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG)，y两者都是一个(4,m)的向量，而最后用于W和b更新的W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG) 是4个实数，分别是对应4个可选值（小狗、小猫、小兔、其他）的W、b导数。所以以上公式还需要把m个样本的结果加总，除以m，以取平均值。
+需要特别说明的是，以上公式只是针对最后一层，针对softmax函数。另外此公式只针对一个样本，实际上我們有m个样本数据要考虑，所以![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)，y两者都是一个(4,m)的向量，而最后用于W和b更新的W导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和b导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG)，是4个实数，分别是对应4个可选值（小狗、小猫、小兔、其他）的W、b导数。所以以上公式还需要把m个样本的结果加总，除以m，以取平均值。
 
 然后我們依此执行对最后一层的W和b的更新：
 
