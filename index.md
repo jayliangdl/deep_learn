@@ -198,6 +198,33 @@ i 表示总共有i个分类；
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample_program.PNG)
 
 
+```markdown
+
+import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as plt
+N=100
+D=2
+K=3
+X=np.zeros((N*K,D))
+y=np.zeros(N*K,dtype='uint8')
+Y = np.zeros((len(y),3))
+
+for j in range(K):
+    ix = range(N*j,N*(j+1))
+    r = np.linspace(0.0,1,N)
+    t = np.linspace(j*4,(j+1)*4,N)+np.random.randn(N)*0.2
+    X[ix]=np.c_[r*np.sin(t),r*np.cos(t)]
+    y[ix]=j
+    Y[ix,j]=1
+
+    
+plt.scatter(X[:,0],X[:,1],c=y,s=40,cmap=plt.cm.Spectral)
+X=X.T
+Y=Y.T
+
+```
+
 
 You can use the [editor on GitHub](https://github.com/jayliangdl/deep_learn/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
