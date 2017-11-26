@@ -62,13 +62,26 @@ i 表示第i个分类；
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample3.PNG)
 
+
+步骤二（计算Cost）：
+单个样本的Cost公式：
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/cost.PNG)
+
+（ 注：本文没有再说明为何要用此Cost公式，如有兴趣请再搜索其他文献）
+
+
+
+
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)是我們训练出网络所计算得到的预估值，我們需要让![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)尽量逼近y，![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)与y的差距尽量小，即cost尽量小。
 
+
+在本例中，由于我們有4个可选值（小狗、小猫、小兔、其他），单个样本的cost公式可再转化为：
 
 
 
 
 You can use the [editor on GitHub](https://github.com/jayliangdl/deep_learn/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
