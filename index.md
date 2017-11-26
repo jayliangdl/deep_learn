@@ -57,9 +57,10 @@ i 表示第i个分类；
 
 
 注：以上只是单个样本的说明，实际上如果有m个样本，g(Z)应该是一个(4,m)的向量。如：
+
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample3.PNG)
 
-
+y ̂是我們训练出网络所计算得到的预估值，我們需要让y ̂尽量逼近y，y ̂与y的差距尽量小，即cost尽量小。
 
 
 
