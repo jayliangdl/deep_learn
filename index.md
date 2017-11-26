@@ -1,14 +1,14 @@
 # 神经网络深度学习--多分类的实现 
 
-### 概要：
+## 概要：
 
 本文主要是描述如何使用神经网络解决多分类问题。具体地，我們举例介绍了多分类的应用场景；介绍其中关键的softmax激活函数；详细介绍了softmax如何执行向前传播、向后传播；详细介绍了softmax的推导过程。最后，我們对一个分为3类的数据集合尝试让程序进行学习辨识，经过一个3层的神经网络（列完整的示例代码），程序能辨识到大部分的数据，准确率达到98%喔。
 
-### 适读人群：
+## 适读人群：
 
 对神经网络有初步了解，知道向前传播、向后传播等神经网络的关键步骤，知道如何用神经网络解决二分类问题。希望扩展了解多分类问题的解决方案，希望了解softmax激活函数的详细计算过程及推导过程。
 
-### 正文：
+## 正文：
 
 
 
@@ -38,9 +38,9 @@ Softmax的公式列如下：
 i 表示总共有i个分类；
 
 
-我們以下例说明具体计算步骤如下：
+### 我們以下例说明具体计算步骤如下：
 
-## 步骤一（向前传播最后一步）：
+#### 步骤一（向前传播最后一步）：
 
 当我們在向前传播算出了最后一层的Z值后（Z=WX+b），（注：最后一层Z是一个（4，1）的向量），我們依据上面提及的
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax2.PNG)
@@ -65,7 +65,7 @@ i 表示总共有i个分类；
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample3.PNG)
 
 
-步骤二（计算Cost）：
+#### 步骤二（计算Cost）：
 单个样本的Cost公式：
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/cost.PNG)
 
@@ -109,7 +109,7 @@ i 表示总共有i个分类；
 我們的目标是尽量让Cost Function J尽量小，依据上面公式，那么就是让![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG)尽量的大。如上例，就是让![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat2.PNG)尽量的大。
 
 
-步骤三（反向传播，计算W和b的导数）：
+#### 步骤三（反向传播，计算W和b的导数）：
 依据上面公式推导出：
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/cost5.PNG)
@@ -132,7 +132,7 @@ i 表示总共有i个分类；
 如果对最后一道softmax层中W、b导数推导有兴趣的同学可以再读以下部分，如果没有兴趣的同学，可以直接跳到样例程序继续阅读。
 
 
-
+### Softmax推导：
 以下是softmax层W和b导数的推导。需要先重点说明的是，我們需要分两种情况推导，第1种情况是我們推导真实类别的W和b导数，例如上例中第2类别小猫是真实类别，我们要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d1.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d2.PNG)；另外，第2种情况是我們推导非真实类别的W和b导数，例如上例中第1类不是真实类别，我们需要求出针对其的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d3.PNG)和![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d4.PNG)。
 
 
@@ -186,6 +186,7 @@ i 表示总共有i个分类；
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d21.PNG)
 也是一致的。
 
+### 示例：
 最后我們将展示一个具体的示例，该示例展示了一个神经网络如何学习并分辨以下的数据点。
 如下图，我們按一定规律产生了三种不同颜色的数据点，这些点由两个feature组成（下图X1和X2）。我們编写了一个3层的神经网络学习这些点的分布，学习过程中，我們不断检测程序学习的准确率。最后程序辨识的准确率可达98%。
 
