@@ -46,6 +46,7 @@ i 表示第i个分类；
 
 例如，
 在训练集中某个样本我們算出Z值为：
+
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample1.PNG)
 
 则：
@@ -53,6 +54,7 @@ i 表示第i个分类；
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/softmax_softmax3.PNG)
 
 得出：
+
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/sample2.PNG)
 
 
