@@ -146,7 +146,7 @@ i 表示总共有i个分类；
 
 从最后一步Cost function J，我們可以计算出![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG) 对Cost的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d7.PNG) （依据公式C）
 
-然后地，我們又可以计算出对 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG) 对𝑍的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d8.PNG)（依据公式B），
+然后地，我們又可以计算出![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/y_hat.PNG) 对Z的导数![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d8.PNG)（依据公式B），
 
 再，我們又可以计算出对Z_对W的导数 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/d9.PNG)（依据公式A），
 
