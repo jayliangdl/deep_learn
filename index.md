@@ -199,7 +199,6 @@ i 表示总共有i个分类；
 
 
 ```markdown
-
 import numpy as np
 %matplotlib inline
 import matplotlib.pyplot as plt
@@ -222,9 +221,148 @@ for j in range(K):
 plt.scatter(X[:,0],X[:,1],c=y,s=40,cmap=plt.cm.Spectral)
 X=X.T
 Y=Y.T
-
 ```
 
+
+```markdown
+import numpy as np
+
+
+def forward(W,b,pre_A,activation):
+    Z=np.dot(W,pre_A)+b
+    if activation=='tanh':
+        A=(np.exp(Z)-np.exp(-Z))/(np.exp(Z)+np.exp(-Z))
+    elif activation=='softmax':
+        A=np.exp(Z)/np.sum(np.exp(Z), axis=1, keepdims=True)
+        
+    return Z,A
+
+def backward(dA,Z,m,pre_A,W,A,Y,activation):
+    if activation=='tanh':
+        s=(np.exp(Z)-np.exp(-Z))/(np.exp(Z)+np.exp(-Z))
+        dZ = dA*(1-s*s)
+        dW=1.0/m*np.dot(dZ,pre_A.T)
+        db=1.0/m*np.sum(dZ,axis=1,keepdims=True)
+        pre_dA=np.dot(W.T,dZ)
+    elif activation=='softmax':
+        print(A.shape)
+        dZ=A-Y
+        dW=1.0/m*np.dot(dZ,pre_A.T)
+        db=1.0/m*np.sum(dZ,axis=1,keepdims=True)
+        pre_dA=np.dot(W.T,dZ)
+    return dZ,dW,db,pre_dA
+
+def update_parameter(learning_rate,W,b,dW,db):
+    W=W-learning_rate*dW
+    b=b-learning_rate*db
+    return W,b
+
+'''
+func:init_parameter(hidden_layer)
+arg:
+    hidden_layer为所有层的
+初始化W/b值，并返回类型为dict的param。
+'''
+def init_parameter(hidden_layer):
+    np.random.seed(3)
+    param = {}
+    for i in range(len(hidden_layer)-1):
+        W=np.random.randn(hidden_layer[i+1],hidden_layer[i])
+        b=np.zeros((hidden_layer[i+1],1))
+        param['W'+str(i+1)]=W
+        param['b'+str(i+1)]=b
+    return param
+
+def cal_cost(m,y_hat,Y):
+    cost=-1/m*np.sum(np.exp(y_hat[Y==1]))
+    return cost
+
+def forward_and_backward(X,Y,hidden_layer,param,m,learning_rate):
+    pre_A=X
+    cache={}
+    cache['A0']=pre_A
+    cost = 0.0
+    for i in range(len(hidden_layer)-1):
+        W=param['W'+str(i+1)]
+        b=param['b'+str(i+1)]
+        if i!=len(hidden_layer)-1:
+            activation='tanh'
+        else:
+            activation='softmax'
+        
+        Z,A = forward(W,b,pre_A,activation)
+        cache['Z'+str(i+1)]=Z
+        cache['A'+str(i+1)]=A
+        pre_A=A
+    
+    y_hat = cache['A'+str(len(hidden_layer)-1)]
+    cost = cal_cost(m,y_hat,Y)
+    dA=0.0    
+    for i in reversed(range(1,len(hidden_layer))):
+        W=param['W'+str(i)]
+        b=param['b'+str(i)]
+        Z=cache['Z'+str(i)]
+        A=cache['A'+str(i)]
+        pre_A=cache['A'+str(i-1)]
+        if i!=len(hidden_layer)-1:
+            activation='tanh'
+        else:
+            activation='softmax'
+        dZ,dW,db,pre_dA = backward(dA,Z,m,pre_A,W,A,Y,activation)
+        dA = pre_dA
+        cache['dZ'+str(i)]=dZ
+        cache['dW'+str(i)]=dW
+        cache['db'+str(i)]=db
+    
+    for i in range(len(hidden_layer)-1):
+        W=param['W'+str(i+1)]
+        b=param['b'+str(i+1)]
+        dW=cache['dW'+str(i+1)]
+        db=cache['db'+str(i+1)]
+        
+        W,b = update_parameter(learning_rate,W,b,dW,db) 
+        param['W'+str(i+1)]=W
+        param['b'+str(i+1)]=b
+    return param,cost,cache
+
+def predict(hidden_layer,param,X,cache):
+    pre_A=X
+    for i in range(len(hidden_layer)-1):
+        W=param['W'+str(i+1)]
+        b=param['b'+str(i+1)]
+        if i!=len(hidden_layer)-1:
+            activation='tanh'
+        else:
+            activation='softmax'
+        
+        Z,A = forward(W,b,pre_A,activation)
+        cache['Z'+str(i+1)]=Z
+        cache['A'+str(i+1)]=A
+        pre_A=A
+        
+    y_hat=A    
+    predict_result = np.argmax(y_hat,axis=0)
+    return predict_result
+    
+def mainlogic(X,Y,hidden_layer,number_iterator,m,learning_rate):
+    param = init_parameter(hidden_layer)
+    standard = np.argmax(Y,axis=0)
+    for i in range(number_iterator):
+        param,cost,cache = forward_and_backward(X,Y,hidden_layer,param,m,learning_rate)
+        predict_result = predict(hidden_layer,param,X,cache)
+        accuracy = np.sum(predict_result==standard)
+        if i%100==0:
+            print("i:"+str(i)+",cost:"+str(cost)+",accuracy:"+str(accuracy))
+    return predict_result,accuracy,cost
+
+if __name__=="__main__":
+    hidden_layer=[X.shape[0],60,20,3]
+    
+    learning_rate=0.0075
+    m=X.shape[1]
+    number_iterator=5000
+    predict_result,accuracy,cost = mainlogic(X,Y,hidden_layer,number_iterator,m,learning_rate)
+```
 
 You can use the [editor on GitHub](https://github.com/jayliangdl/deep_learn/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
