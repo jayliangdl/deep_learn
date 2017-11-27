@@ -2,7 +2,7 @@
 
 ## 概要：
 
-本文主要是描述如何使用神经网络解决多分类问题。具体地，我們举例介绍了多分类的应用场景；介绍其中关键的softmax激活函数；详细介绍了softmax如何执行向前传播、向后传播；详细介绍了softmax的推导过程。最后，我們对一个分为3类的数据集合尝试让程序进行学习辨识，经过一个3层的神经网络（列完整的示例代码），程序能辨识到大部分的数据，准确率达到99%以上喔。
+本文主要是描述如何使用神经网络解决多分类问题。具体地，我們举例介绍了多分类的应用场景；介绍其中关键的softmax激活函数；详细介绍了softmax如何执行向前传播、向后传播；详细介绍了softmax的推导过程。最后，我們对一个分为3类的数据集合尝试让程序进行学习辨识，经过一个3层的神经网络（列完整的示例代码），程序能辨识到大部分的数据，准确率达到99%喔。
 
 ## 适读人群：
 
@@ -230,7 +230,6 @@ def forward(W,b,pre_A,activation):
         A=(np.exp(Z)-np.exp(-Z))/(np.exp(Z)+np.exp(-Z))
     elif activation=='softmax':
         A=np.exp(Z)/np.sum(np.exp(Z), axis=1, keepdims=True)
-        
     return Z,A
 
 def backward(dA,Z,m,pre_A,W,A,Y,activation):
@@ -252,6 +251,12 @@ def update_parameter(learning_rate,W,b,dW,db):
     b=b-learning_rate*db
     return W,b
 
+'''
+func:init_parameter(hidden_layer)
+arg:
+    hidden_layer为所有层的
+初始化W/b值，并返回类型为dict的param。
+'''
 def init_parameter(hidden_layer):
     np.random.seed(3)
     param = {}
@@ -271,19 +276,18 @@ def forward_and_backward(X,Y,hidden_layer,param,m,learning_rate):
     cache={}
     cache['A0']=pre_A
     cost = 0.0
-    for i in range(len(hidden_layer)-1):
-        W=param['W'+str(i+1)]
-        b=param['b'+str(i+1)]
+    for i in range(1,len(hidden_layer)):
+        W=param['W'+str(i)]
+        b=param['b'+str(i)]
         if i!=len(hidden_layer)-1:
             activation='tanh'
         else:
             activation='softmax'
-        
+        ##print('activation:'+activation+',len(hidden_layer)-1:'+str(len(hidden_layer)-1)+',i='+str(i))
         Z,A = forward(W,b,pre_A,activation)
-        cache['Z'+str(i+1)]=Z
-        cache['A'+str(i+1)]=A
+        cache['Z'+str(i)]=Z
+        cache['A'+str(i)]=A
         pre_A=A
-    
     y_hat = cache['A'+str(len(hidden_layer)-1)]
     cost = cal_cost(m,y_hat,Y)
     dA=0.0    
@@ -297,6 +301,7 @@ def forward_and_backward(X,Y,hidden_layer,param,m,learning_rate):
             activation='tanh'
         else:
             activation='softmax'
+        
         dZ,dW,db,pre_dA = backward(dA,Z,m,pre_A,W,A,Y,activation)
         dA = pre_dA
         cache['dZ'+str(i)]=dZ
@@ -316,9 +321,9 @@ def forward_and_backward(X,Y,hidden_layer,param,m,learning_rate):
 
 def predict(hidden_layer,param,X,cache):
     pre_A=X
-    for i in range(len(hidden_layer)-1):
-        W=param['W'+str(i+1)]
-        b=param['b'+str(i+1)]
+    for i in range(1,len(hidden_layer)):
+        W=param['W'+str(i)]
+        b=param['b'+str(i)]
         if i!=len(hidden_layer)-1:
             activation='tanh'
         else:
@@ -336,45 +341,55 @@ def predict(hidden_layer,param,X,cache):
 def mainlogic(X,Y,hidden_layer,number_iterator,m,learning_rate):
     param = init_parameter(hidden_layer)
     standard = np.argmax(Y,axis=0)
+    costs = []
     for i in range(number_iterator):
         param,cost,cache = forward_and_backward(X,Y,hidden_layer,param,m,learning_rate)
         predict_result = predict(hidden_layer,param,X,cache)
         accuracy = np.sum(predict_result==standard)
+        costs.append(cost)
         if i%100==0:
             print("i:"+str(i)+",cost:"+str(cost)+",accuracy:"+str(accuracy))
-    return predict_result,accuracy,cost
+    return predict_result,accuracy,costs
 
-if __name__=="__main__":
-    hidden_layer=[X.shape[0],60,20,3]
+def plot_cost(cost):
+    plt.plot(np.squeeze(cost))
+    plt.ylabel('cost')
+    plt.xlabel('iterations (per tens)')
+    plt.title("Learning rate =" + str(learning_rate))
+    plt.show()
     
-    learning_rate=0.0075
+if __name__=="__main__":
+    ##hidden_layer=[X.shape[0],400,150,60,20,5]
+    hidden_layer=[X.shape[0],60,60,60,20,3]   
+    learning_rate=0.0025
     m=X.shape[1]
-    number_iterator=1000
-    predict_result,accuracy,cost = mainlogic(X,Y,hidden_layer,number_iterator,m,learning_rate)
+    number_iterator=5000
+    predict_result,accuracy,costs = mainlogic(X,Y,hidden_layer,number_iterator,m,learning_rate)
+    plot_cost(costs)
 ```
 
-以下是经过2000次iterator后，系统稳定成功学习(或分辨出)到298个点(总共300个点)，准确率达99%以上喔。
+以下是经过2000次iterator后，系统稳定成功学习(或分辨出)到297个点(总共300个点)，准确率达99%喔。
 ```markdown
-i:0,cost:-1.08794075622,accuracy:68
-i:100,cost:-1.85382745221,accuracy:220
-i:200,cost:-2.03297882971,accuracy:261
-i:300,cost:-2.13229221009,accuracy:270
-i:400,cost:-2.20329231893,accuracy:284
-i:500,cost:-2.26014863013,accuracy:290
-i:600,cost:-2.30750956501,accuracy:293
-i:700,cost:-2.34635566878,accuracy:296
-i:800,cost:-2.37736114138,accuracy:298
-i:900,cost:-2.40211682975,accuracy:298
-i:1000,cost:-2.42218998888,accuracy:298
-i:1100,cost:-2.43877230178,accuracy:298
-i:1200,cost:-2.45271723467,accuracy:298
-i:1300,cost:-2.46463049382,accuracy:298
-i:1400,cost:-2.47494547398,accuracy:298
-i:1500,cost:-2.48397637848,accuracy:298
-i:1600,cost:-2.49195496261,accuracy:298
-i:1700,cost:-2.49905636529,accuracy:298
-i:1800,cost:-2.50541703851,accuracy:298
-i:1900,cost:-2.51114663761,accuracy:298
+i:0,cost:-1.00425001887,accuracy:77
+i:100,cost:-1.00960415266,accuracy:201
+i:200,cost:-1.01019304962,accuracy:205
+i:300,cost:-1.01023517388,accuracy:226
+i:400,cost:-1.01012050221,accuracy:237
+i:500,cost:-1.01016053198,accuracy:249
+i:600,cost:-1.01016049805,accuracy:257
+i:700,cost:-1.01015466555,accuracy:274
+i:800,cost:-1.01014441334,accuracy:278
+i:900,cost:-1.01014262111,accuracy:282
+i:1000,cost:-1.01013384524,accuracy:284
+i:1100,cost:-1.01012608841,accuracy:291
+i:1200,cost:-1.01012362605,accuracy:297
+i:1300,cost:-1.01012404841,accuracy:298
+i:1400,cost:-1.01012426553,accuracy:297
+i:1500,cost:-1.01012250052,accuracy:297
+i:1600,cost:-1.01012198624,accuracy:297
+i:1700,cost:-1.01012073925,accuracy:297
+i:1800,cost:-1.01011962705,accuracy:297
+i:1900,cost:-1.01011462194,accuracy:297
 ```
 
 ## 后记：
