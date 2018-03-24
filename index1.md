@@ -135,7 +135,7 @@
 
 调整更精细不行，为什么呢？难度是因为调整更细了，系统学习到和关注到更多细微之处，从而降低了它的泛化能力，产生过拟合？调细不行，那我要调粗一点更好？嗯试试吧。接着我再把长度调整成50mm一份，宽度和高度调整成40mm一份，体积维持一样。列变少了如下图。再试！！结果从刚才最优的82.66%提高到了84.37%！！
 
-![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/column_change.PNG)
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/column_change.png)
 
 到此，我没有再继续优化，不过有几个优化点是有想法的：
 1.	我们当前把剩余不通常出现的56个分类只分到1类，这肯定会导致错误率高一些。因为通常不出现的分类要么要用顾客订购了很多商品，体积可能很大，导致使用了一些不常用的箱子；要么订购了体积很小的商品。所以就把它们分为一类是不合理的。所以可以考虑分成多几类。
