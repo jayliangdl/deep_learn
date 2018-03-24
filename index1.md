@@ -157,4 +157,4 @@
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/ordqty_percentage.png)
 
 
-时间关系，到此为止，有时间再深化~！收工！领赞。（脸皮还不是一般的厚喔，还领赞？  (https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/han.png) ）
+时间关系，到此为止，有时间再深化~！收工！领赞。（脸皮还不是一般的厚喔，还领赞？！   ！![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/han.png) ）
