@@ -17,3 +17,6 @@
 
 上面背景的废话说完，我們来进入主题。Talk is cheap! Show me the code~! 
 先来看看原始数据的情况：
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/source_data.PNG)
+
