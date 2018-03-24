@@ -16,6 +16,10 @@
 我有什么？！我有以往订单的情况及其装箱方案。我想能否通过以往的装箱方案数据推算出未来订单的装箱方案？通过这个再换算估算的费用？嗯…我想应该可以。 
 
 上面背景的废话说完，我們来进入主题。Talk is cheap! Show me the code~! 
+
+
+## 正文：
+
 先来看看原始数据的情况：
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/source_data.PNG)
@@ -137,6 +141,20 @@
 
 ![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/column_change.png)
 
-到此，我没有再继续优化，不过有几个优化点是有想法的：
+
+## 后记：
+
+上面的优化处理到此为止，不过有几个优化的想法是值得在日后有时间的时候再试试的：
 1.	我们当前把剩余不通常出现的56个分类只分到1类，这肯定会导致错误率高一些。因为通常不出现的分类要么要用顾客订购了很多商品，体积可能很大，导致使用了一些不常用的箱子；要么订购了体积很小的商品。所以就把它们分为一类是不合理的。所以可以考虑分成多几类。
 2.	我们当前尝试使用了决策树和随机森林，其他机器学习算法对它进行学习及预测是否更好，例如SVM，逻辑回归等等是否更好？
+（文章后期补充）后来我，简单试了一下SVM，对验证集的准确率竟然是89%！！滴血滴血~~！![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/han.png)枉费我上面处理了这么一大段~！！！本来以为算法之间差距很小，集种精力在对数据进行预处理上。看来是错的！在不同场景和案例下不同算法还是有一定差别的。下次可以提早试试。
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/svm_result.PNG)
+
+3.	还有，我们把所有商品的长宽高、体积等分段划分，目的是产生每张订单有相同的feature定义（就是所有订单的列相同），这样处理是否真的好？我统计过顾客每张订单订购的商品数量都集中在1~12之间，其余的情况是很少的，如下图，:统计每张订单订购商品的数量及该情况的占比（例如下图结果的第1行，13.98%的订单是只订购一个商品的）。
+对于每种情况，应该可以认为订购商品的大小和装箱方案是有线性关系的，例如，对于都是订购1个商品的订单，订购商品的体积越大，就要用越大的箱子来装放。那么能否为这多数的12种情况建立12套模型？例如，如果顾客订购一种商品，则只有一个feature，Feature为商品的长宽高和体积；顾客订购两种商品，就有两个feature，Feature按商品的长宽高体积 从大到小排列，例如第1个feature为体积最大商品的体积，第2个feature为另外一个商品的体积。如是类推。然后产出12套模型。
+
+![Mou icon](https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/ordqty_percentage.png)
+
+
+时间关系，到此为止，有时间再深化~！收工！领赞。（脸皮还不是一般的厚喔，还领赞？  (https://raw.githubusercontent.com/jayliangdl/jayliangdl.github.io/master/han.png) ）
